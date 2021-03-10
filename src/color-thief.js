@@ -84,6 +84,7 @@ ColorThief.prototype.getPalette = function(sourceImage, colorCount, quality) {
     });
 
     // Create custom CanvasImage object
+    // image拥有宽高、context、canvas的dom
     const image      = new CanvasImage(sourceImage);
     const imageData  = image.getImageData();
     const pixelCount = image.width * image.height;
@@ -92,6 +93,7 @@ ColorThief.prototype.getPalette = function(sourceImage, colorCount, quality) {
 
     // Send array to quantize function which clusters values
     // using median cut algorithm
+    // 基于第三方库quantize，从像素数组中拿到用的最多的颜色rgb数组
     const cmap    = quantize(pixelArray, options.colorCount);
     const palette = cmap? cmap.palette() : null;
 
